@@ -7,7 +7,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=go-bootstrap
-PKG_VERSION:=1.4.3
+PKG_VERSION:=1.16
 OS=$(shell uname | tr 'A-Z' 'a-z')
 bintype:=$(shell uname -m | sed \
         -e 's/i[3-9]86/386/' \
@@ -15,7 +15,7 @@ bintype:=$(shell uname -m | sed \
 )
 
 PKG_SOURCE:=go$(PKG_VERSION).$(OS)-$(bintype).tar.gz
-PKG_HASH:=ce3140662f45356eb78bc16a88fc7cfb29fb00e18d7c632608245b789b2086d2
+PKG_HASH:=6000a9522975d116bf76044967d7e69e04e982e9625330d9a539a8b45395f9a8
 PKG_SOURCE_URL:=https://storage.googleapis.com/golang
 HOST_BUILD_DIR:=$(STAGING_DIR_HOST)/go1.4
 HOST_UNPACK:=gzip -dc $(DL_DIR)/$(PKG_SOURCE) | tar -C $(HOST_BUILD_DIR) --strip-components=1 -xf -
