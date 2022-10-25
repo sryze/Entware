@@ -14,10 +14,16 @@ bintype:=$(shell uname -m | sed \
         -e 's/x86_64/amd64/' \
 )
 
-PKG_SOURCE:=go$(PKG_VERSION).$(OS)-$(bintype).tar.gz
 PKG_HASH:=ce3140662f45356eb78bc16a88fc7cfb29fb00e18d7c632608245b789b2086d2
+ifeq ($(OS),darwin)
+  ifeq ($(bintype),arm64)
+    PKG_VERSION:=1.16
+    PKG_HASH:=4dac57c00168d30bbd02d95131d5de9ca88e04f2c5a29a404576f30ae9b54810
+  endif
+endif
+PKG_SOURCE:=go$(PKG_VERSION).$(OS)-$(bintype).tar.gz
 PKG_SOURCE_URL:=https://storage.googleapis.com/golang
-HOST_BUILD_DIR:=$(STAGING_DIR_HOST)/go1.4
+HOST_BUILD_DIR:=$(STAGING_DIR_HOST)/go$(PKG_VERSION)
 HOST_UNPACK:=gzip -dc $(DL_DIR)/$(PKG_SOURCE) | tar -C $(HOST_BUILD_DIR) --strip-components=1 -xf -
 
 include $(INCLUDE_DIR)/host-build.mk
