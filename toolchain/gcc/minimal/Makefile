@@ -6,6 +6,7 @@ include ../common.mk
 GCC_CONFIGURE += \
 	--with-newlib \
 	--without-headers \
+	--without-zstd \
 	--enable-languages=c \
 	--disable-libsanitizer \
 	--disable-libssp \
