@@ -4,6 +4,7 @@
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
 #
+# Entware specific: keep CONFIG_USE_GLIBC
 
 include $(TOPDIR)/rules.mk
 
@@ -12,13 +13,16 @@ PKG_VERSION:=5.1.5
 PKG_RELEASE:=10
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=http://www.lua.org/ftp/ \
-	http://www.tecgraf.puc-rio.br/lua/ftp/
+PKG_SOURCE_URL:=https://www.lua.org/ftp/ \
+	https://www.tecgraf.puc-rio.br/lua/ftp/
 PKG_HASH:=2640fc56a795f29d28ef15e13c34a47e223960b0240e8cb0a82d9b0738695333
 PKG_BUILD_PARALLEL:=1
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=COPYRIGHT
+PKG_CPE_ID:=cpe:/a:lua:lua
+
+PKG_BUILD_FLAGS:=no-lto
 
 HOST_PATCH_DIR := ./patches-host
 
@@ -30,7 +34,7 @@ define Package/lua/Default
   SECTION:=lang
   CATEGORY:=Languages
   TITLE:=Lua programming language
-  URL:=http://www.lua.org/
+  URL:=https://www.lua.org/
   MAINTAINER:=Jo-Philipp Wich <jo@mein.io>
 endef
 
@@ -153,7 +157,6 @@ define Build/InstallDev
 	$(LN) liblua.so.$(PKG_VERSION) $(1)/opt/lib/liblualib.so
 	$(INSTALL_DIR) $(1)/opt/lib/pkgconfig
 	$(CP) $(PKG_BUILD_DIR)/etc/lua.pc $(1)/opt/lib/pkgconfig/
-	$(SED) 's,/usr/local,/opt,g' $(1)/opt/lib/pkgconfig/lua.pc
 endef
 
 define Package/liblua/install

@@ -1,5 +1,10 @@
-commit a0b7fef0ffe4cd9cca39a652a37e4f3ce8f0a681 (HEAD -> master, origin/master, origin/HEAD)
-Author: David Bauer <mail@david-bauer.net>
-Date:   Fri May 27 17:48:06 2022 +0200
+commit 07ea72976168461d9a243a4201a8d1e6cf529715 (HEAD -> master, origin/master, origin/main, origin/HEAD)
+Author: Nick Hainke <vincent@systemli.org>
+Date:   Tue Feb 6 12:26:33 2024 +0100
 
-    ramips: add support for ZyXEL NWA50AX / NWA55AXE
+    toolchain: binutils: add support for version 2.42
+    
+    Release Notes:
+    https://lists.gnu.org/archive/html/info-gnu/2024-01/msg00016.html
+    
+    Signed-off-by: Nick Hainke <vincent@systemli.org>

@@ -5,9 +5,9 @@ PKG_RELEASE=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL=$(PROJECT_GIT)/project/libubox.git
-PKG_MIRROR_HASH:=cf48d00ed0ea74d53f2043eb9f9dc52834c0b214f258201cf22dfff7dd6c6e40
-PKG_SOURCE_DATE:=2022-05-15
-PKG_SOURCE_VERSION:=d2223ef9da7172a84d1508733dc58840e1381e3c
+PKG_MIRROR_HASH:=071139fed757bea240d4ba8f55a0ff5a81862d23e16b39fc871ae07da78ae6a4
+PKG_SOURCE_DATE:=2024-01-26
+PKG_SOURCE_VERSION:=c1be505732e6d254464973bdeacb955214c76c46
 PKG_ABI_VERSION:=$(call abi_version_str,$(PKG_SOURCE_DATE))
 CMAKE_INSTALL:=1
 
@@ -66,6 +66,7 @@ define Package/libubox-lua
   TITLE:=Lua binding for the OpenWrt Basic utility library
 endef
 
+TARGET_CFLAGS += -I$(STAGING_DIR)/opt/include
 CMAKE_OPTIONS += \
 	-DLUAPATH=/opt/lib/lua
 
@@ -102,6 +103,14 @@ CMAKE_HOST_OPTIONS += \
 	-DCMAKE_SKIP_RPATH=FALSE \
 	-DCMAKE_MACOSX_RPATH=1 \
 	-DCMAKE_INSTALL_RPATH="${STAGING_DIR_HOST}/lib"
+
+ifeq ($(HOST_OS),Darwin)
+  define Host/Install
+	$(Host/Install/Default)
+	$(INSTALL_DIR) $(STAGING_DIR_HOSTPKG)/lib
+	cd "$(STAGING_DIR_HOSTPKG)/lib" && ln -sf ../../host/lib/libubox.* .
+  endef
+endif
 
 $(eval $(call BuildPackage,libubox))
 $(eval $(call BuildPackage,libblobmsg-json))
