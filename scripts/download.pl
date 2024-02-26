@@ -320,7 +320,7 @@ foreach my $mirror (@ARGV) {
 push @mirrors, 'https://sources.cdn.openwrt.org';
 push @mirrors, 'https://sources.openwrt.org';
 push @mirrors, 'https://mirror2.openwrt.org/sources';
-push @mirrors, 'https://src.entware.net';
+# push @mirrors, 'https://src.entware.net';
 
 if (-f "$target/$filename") {
 	$hash_cmd and do {
